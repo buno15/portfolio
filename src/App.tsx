@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, ExternalLink, Gamepad2 } from 'lucide-react'
+import invictvsImage from './assets/invictvs.jpg'
 
 function IconGitHub({ size = 16, className }: { size?: number; className?: string }) {
   return (
@@ -21,12 +22,35 @@ function IconX({ size = 16, className }: { size?: number; className?: string }) 
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
+interface Work {
+  title: string
+  kind: string
+  description: string
+  tags: string[]
+  image: string
+  href: string
+  linkLabel: string
+}
+
 interface SkillGroup {
   label: string
   skills: string[]
 }
 
 // ── Data ──────────────────────────────────────────────────────────────────────
+
+const WORKS: Work[] = [
+  {
+    title: 'Invictvs',
+    kind: 'Game · Steam',
+    description:
+      '紀元前の闘技場で、名もなき剣闘士奴隷として勝ち続け自由を目指すアクションローグライト。技ごとに異なるアクション入力を持ち、4つの戦闘スタイル・スキルツリー・装備・誓約・分岐イベントを組み合わせてボスに挑む。個人で開発・パブリッシュ。',
+    tags: ['Action', 'Roguelite', 'Solo Dev', '2026'],
+    image: invictvsImage,
+    href: 'https://store.steampowered.com/app/5048570/Invictvs/',
+    linkLabel: 'Steam で見る',
+  },
+]
 
 const SKILL_GROUPS: SkillGroup[] = [
   { label: 'Languages', skills: ['TypeScript', 'Go', 'Python', 'Java', 'Kotlin', 'PHP', 'C#', 'Dart', 'Shell'] },
@@ -122,6 +146,55 @@ export default function App() {
 
       {/* Main content */}
       <div className="max-w-3xl mx-auto px-6 pb-24 space-y-24">
+        {/* Works */}
+        <FadeSection>
+          <SectionHeading>Works</SectionHeading>
+          <div className="space-y-6">
+            {WORKS.map((work) => (
+              <a
+                key={work.title}
+                href={work.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-xl overflow-hidden bg-white/[0.03] glow-border hover:bg-white/[0.06] transition-colors group"
+              >
+                <div className="relative aspect-[900/516] bg-gradient-to-br from-cyan-500/10 to-violet-500/10 flex items-center justify-center">
+                  <Gamepad2 size={40} className="text-slate-600" />
+                  <img
+                    src={work.image}
+                    alt={work.title}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                    }}
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs font-mono text-cyan-500/80 tracking-widest uppercase mb-2">{work.kind}</p>
+                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+                    {work.title}
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed mb-4">{work.description}</p>
+                  <div className="flex items-center justify-between gap-4 flex-wrap">
+                    <div className="flex flex-wrap gap-2">
+                      {work.tags.map((tag) => (
+                        <span key={tag} className="px-2.5 py-0.5 rounded-full text-xs bg-white/5 text-slate-400">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="flex items-center gap-1.5 text-sm text-cyan-400">
+                      {work.linkLabel}
+                      <ExternalLink size={14} />
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </FadeSection>
+
         {/* Skills */}
         <FadeSection>
           <SectionHeading>Skills</SectionHeading>
