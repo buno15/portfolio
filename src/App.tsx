@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ChevronDown, ExternalLink, Gamepad2 } from 'lucide-react'
+import invictvsImage from './assets/invictvs.jpg'
 
 function IconGitHub({ size = 16, className }: { size?: number; className?: string }) {
   return (
@@ -45,7 +46,7 @@ const WORKS: Work[] = [
     description:
       '紀元前の闘技場で、名もなき剣闘士奴隷として勝ち続け自由を目指すアクションローグライト。技ごとに異なるアクション入力を持ち、4つの戦闘スタイル・スキルツリー・装備・誓約・分岐イベントを組み合わせてボスに挑む。個人で開発・パブリッシュ。',
     tags: ['Action', 'Roguelite', 'Solo Dev', '2026'],
-    image: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5048570/header.jpg',
+    image: invictvsImage,
     href: 'https://store.steampowered.com/app/5048570/Invictvs/',
     linkLabel: 'Steam で見る',
   },
@@ -157,7 +158,7 @@ export default function App() {
                 rel="noopener noreferrer"
                 className="block rounded-xl overflow-hidden bg-white/[0.03] glow-border hover:bg-white/[0.06] transition-colors group"
               >
-                <div className="relative aspect-[460/215] bg-gradient-to-br from-cyan-500/10 to-violet-500/10 flex items-center justify-center">
+                <div className="relative aspect-[900/516] bg-gradient-to-br from-cyan-500/10 to-violet-500/10 flex items-center justify-center">
                   <Gamepad2 size={40} className="text-slate-600" />
                   <img
                     src={work.image}
